@@ -9,9 +9,10 @@ public class User {
     private String first_name;
     private String last_name;
     private String date_of_birth;
+    private int age;
     private Gender gender;
-    private int height;
-    private String zipcode;
+    private double height;
+    private String zip_code;
 
     public void createTestUser()
     {
@@ -20,7 +21,7 @@ public class User {
         this.date_of_birth = "1992-05-19";
         this.gender = Gender.MALE;
         this.height = 176;
-        this.zipcode = "06230";
+        this.zip_code = "06230";
 
     }
 
@@ -52,24 +53,32 @@ public class User {
         return date_of_birth;
     }
 
+    public int getAge() {
+        return age;
+    }
+
     public void setDate_of_birth(String date_of_birth) {
         this.date_of_birth = date_of_birth;
     }
 
-    public int getHeight() {
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public double getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(double height) {
         this.height = height;
     }
 
     public String getZipcode() {
-        return zipcode;
+        return zip_code;
     }
 
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
+    public void setZipcode(String zip_code) {
+        this.zip_code = zip_code;
     }
 
     public Gender getGender() {

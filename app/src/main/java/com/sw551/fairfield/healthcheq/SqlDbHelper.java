@@ -107,7 +107,7 @@ public class SqlDbHelper extends SQLiteOpenHelper{
         values.put(USER_COLUMN_4, new_user.getDate_of_birth());
         values.put(USER_COLUMN_5, new_user.getGender().ordinal());
         values.put(USER_COLUMN_6, new_user.getHeight());
-        values.put(USER_COLUMN_7, new_user.getZip_code());
+        values.put(USER_COLUMN_7, new_user.getZipcode());
         db.insert(DATABASE_TABLE_1, null, values);
         db.close();
     }
@@ -121,7 +121,7 @@ public class SqlDbHelper extends SQLiteOpenHelper{
         values.put(USER_COLUMN_4, new_user.getDate_of_birth());
         values.put(USER_COLUMN_5, new_user.getGender().ordinal());
         values.put(USER_COLUMN_6, new_user.getHeight());
-        values.put(USER_COLUMN_7, new_user.getZip_code());
+        values.put(USER_COLUMN_7, new_user.getZipcode());
         //db.update(DATABASE_TABLE_1, null, values); TODO
         db.close();
     }
@@ -147,7 +147,7 @@ public class SqlDbHelper extends SQLiteOpenHelper{
                 user.setDate_of_birth(cursor.getString(3));
                 //user.setGender(cursor.getString(4));
                 user.setHeight(Integer.parseInt(cursor.getString(5)));
-                user.setZip_code(cursor.getString(6));
+                user.setZipcode(cursor.getString(6));
 			} while (cursor.moveToNext());
 		}
 		cursor.close();

@@ -61,12 +61,26 @@
             android:layout_height="wrap_content"
             android:id="@+id/datePicker" />-->
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Feet"
+            android:id="@+id/textView2" />
+
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spinnerFeet"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Inches"
+            android:id="@+id/textView" />
 
         <Spinner
             android:layout_width="match_parent"

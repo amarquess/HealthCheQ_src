@@ -72,7 +72,7 @@ public class ProfileActivity extends ActionBarActivity {
         double totalInches = (feet*12)+ inches;
         double heightCM = totalInches * 2.54;
         user.setHeight(heightCM);
-        user.setZip_code(zipCode.getText().toString());
+        user.setZipcode(zipCode.getText().toString());
         SqlDbHelper db = new SqlDbHelper(v.getContext());
         db.addUser(user);
     }

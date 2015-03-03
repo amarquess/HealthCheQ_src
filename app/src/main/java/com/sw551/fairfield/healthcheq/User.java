@@ -73,11 +73,11 @@ public class User {
         this.height = height;
     }
 
-    public String getZip_code() {
+    public String getZipcode() {
         return zip_code;
     }
 
-    public void setZip_code(String zip_code) {
+    public void setZipcode(String zip_code) {
         this.zip_code = zip_code;
     }
 

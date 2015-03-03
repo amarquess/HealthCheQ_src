@@ -1,36 +1,17 @@
 package com.sw551.fairfield.healthcheq;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 
-public class KnowTheFactsActivity extends ActionBarActivity {
-public Button button22,button33;
+public class know_the_facts_child2 extends ActionBarActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_know_the_facts);
-        button22=(Button)findViewById(R.id.button2);
-        button33=(Button)findViewById(R.id.button3);
-        button22.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent23=new Intent(KnowTheFactsActivity.this,know_the_facts_child1.class);
-                startActivity(intent23);
-            }
-        });
-        button33.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent23=new Intent(KnowTheFactsActivity.this,know_the_facts_child2.class);
-                startActivity(intent23);
-            }
-        });
+        setContentView(R.layout.activity_know_the_facts_child2);
     }
 
 

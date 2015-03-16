@@ -36,7 +36,7 @@
         <RadioGroup
             android:id="@+id/radioSex"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:orientation="horizontal"
             android:weightSum="1">
 
@@ -61,6 +61,37 @@
             android:layout_height="wrap_content"
             android:id="@+id/datePicker" />-->
 
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:onClick="selectDate"
+            android:layout_weight="0.31">
+
+            <EditText
+                android:id="@+id/editText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="56dp"
+                android:ems="10"
+                android:inputType="date">
+                <requestFocus />
+            </EditText>
+            <ImageButton
+                android:id="@+id/imageButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/editText1"
+                android:layout_toRightOf="@+id/editText1"
+                android:contentDescription="date"
+                android:cropToPadding="true"
+                android:onClick="selectDate"
+                android:src="@drawable/ic_launcher" />
+        </RelativeLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,10 +101,11 @@
 
         <Spinner
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:id="@+id/spinnerFeet"
             android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown" />
+            android:spinnerMode="dropdown"
+            android:layout_weight="0.15" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -84,10 +116,11 @@
 
         <Spinner
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="29dp"
             android:id="@+id/spinnerInches"
             android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown" />
+            android:spinnerMode="dropdown"
+            android:layout_weight="0.21" />
 
         <EditText
             android:layout_width="match_parent"

@@ -26,7 +26,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void startGoals(View v)
     {
-        Intent intent = new Intent(getApplicationContext(),SetGoalsActivity.class);
+        Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
         startActivity(intent);
     }
 

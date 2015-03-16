@@ -1,6 +1,8 @@
 package com.sw551.fairfield.healthcheq;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.IntegerRes;
 import android.support.v7.app.ActionBarActivity;
@@ -20,7 +22,7 @@ import java.util.Calendar;
 
 public class ProfileActivity extends ActionBarActivity {
 
-    EditText  firstName, lastName, zipCode;
+    EditText  firstName, lastName, zipCode, mEdit;
     DatePicker birthDate;
     Spinner dropdownFeet, dropdownInches;
     RadioGroup radioSexGroup;
@@ -32,8 +34,7 @@ public class ProfileActivity extends ActionBarActivity {
         setContentView(R.layout.activity_profile);
         firstName = (EditText)this.findViewById(R.id.firstName);
         lastName = (EditText)this.findViewById(R.id.lastName);
-        //birthDate = (DatePicker)this.findViewById(R.id.datePicker);
-        //birthDate.setOnClickListener(this);
+
         radioSexGroup = (RadioGroup)findViewById(R.id.radioSex);
         male = (RadioButton)findViewById(R.id.male);
         dropdownFeet = (Spinner)findViewById(R.id.spinnerFeet);
@@ -47,6 +48,24 @@ public class ProfileActivity extends ActionBarActivity {
         zipCode = (EditText)this.findViewById(R.id.zipCode);
     }
 
+   /* @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        final Calendar calendar = Calendar.getInstance();
+        int yy = calendar.get(Calendar.YEAR);
+        int mm = calendar.get(Calendar.MONTH);
+        int dd = calendar.get(Calendar.DAY_OF_MONTH);
+        return new DatePickerDialog(getActivity(), this, yy, mm, dd);
+    }
+
+    public void onDateSet(DatePicker view, int yy, int mm, int dd) {
+        populateSetDate(yy, mm+1, dd);
+    }
+
+    public void populateSetDate(int year, int month, int day) {
+        mEdit = (EditText)findViewById(R.id.editText1);
+        mEdit.setText(month+"/"+day+"/"+year);
+    }*/
+
     public void submitProfile(View v)
     {
         User user = new User();
@@ -58,6 +77,8 @@ public class ProfileActivity extends ActionBarActivity {
         else
             user.setGender(Gender.FEMALE);
 
+       // DialogFragment newFragment = new SelectDateFragment();
+       // newFragment.show(getSupportFragmentManager(), "DatePicker");
        /* int day = birthDate.getDayOfMonth();
         int month = birthDate.getMonth();
         int year = birthDate.getYear();
@@ -70,7 +91,8 @@ public class ProfileActivity extends ActionBarActivity {
         dropdownInches = (Spinner)findViewById(R.id.spinnerInches);
         Integer inches = (Integer)dropdownInches.getSelectedItem();
         double totalInches = (feet*12)+ inches;
-        double heightCM = totalInches * 2.54;
+        double height = totalInches * 2.54;
+        int heightCM = (int)height;
         user.setHeight(heightCM);
         user.setZipcode(zipCode.getText().toString());
         SqlDbHelper db = new SqlDbHelper(v.getContext());

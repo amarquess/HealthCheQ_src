@@ -12,7 +12,6 @@
     <string name="title_activity_know_the_facts">Know the Facts</string>
     <string name="title_activity_settings">Settings</string>
 
-
     <color name="white">#FFFFFF</color>
     <color name="blue">#3FA9F5</color>
     <color name="light_grey">#BCBCBC</color>
@@ -22,8 +21,12 @@
     <color name="orange">#F68427</color>
     <color name="red">#F53939</color>
     <color name="yellow">#F6F627</color>
-
     <color name="dark_blue">#035058</color>
     <color name="light_blue">#00BCD5</color>
+
+    <string name="title_activity_know_the_facts_child1">Body Mass Index</string>
+    <string name="kyf">Body Mass Index</string>
+    <string name="title_activity_know_the_facts_child2">Health Tips</string>
+    <string name="kyc2">Health Tips</string>
 
 </resources>

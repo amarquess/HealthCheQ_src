@@ -10,6 +10,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class SqlDbHelper extends SQLiteOpenHelper{
+
+    private static SqlDbHelper sInstance;
 	
 	public static final String DATABASE_NAME = "HealthCheQ";
 	public static final String DATABASE_TABLE_1 = "USER_TABLE";
@@ -53,12 +55,12 @@ public class SqlDbHelper extends SQLiteOpenHelper{
             + USER_COLUMN_7 + " TEXT" + ")";
 
     String SCRIPT_CREATE_DATABASE_2 = "CREATE TABLE " + DATABASE_TABLE_2 + "("
-            + HISTORY_COLUMN_1 + " INTEGER PRIMARY KEY," + HISTORY_COLUMN_2 + " INTEGER,"
+            + HISTORY_COLUMN_1 + " INTEGER PRIMARY KEY," + HISTORY_COLUMN_2 + " REAL,"
             + HISTORY_COLUMN_3 + " REAL," + HISTORY_COLUMN_4 + " TEXT,"
             + HISTORY_COLUMN_5 + " INTEGER" + ")";
 
     String SCRIPT_CREATE_DATABASE_3 = "CREATE TABLE " + DATABASE_TABLE_3 + "("
-            + BMI_COLUMN_1 + " INTEGER PRIMARY KEY," + BMI_COLUMN_2 + " INTEGER,"
+            + BMI_COLUMN_1 + " INTEGER PRIMARY KEY," + BMI_COLUMN_2 + " REAL,"
             + BMI_COLUMN_3 + " REAL," + BMI_COLUMN_4 + " TEXT,"
             + BMI_COLUMN_5 + " INTEGER" + ")";
 
@@ -68,6 +70,16 @@ public class SqlDbHelper extends SQLiteOpenHelper{
             + GOAL_COLUMN_5 + " INTEGER" + ")";
 
 
+    public static SqlDbHelper getInstance(Context context) {
+
+        // Use the application context, which will ensure that you
+        // don't accidentally leak an Activity's context.
+        // See this article for more information: http://bit.ly/6LRzfx
+        if (sInstance == null) {
+            sInstance = new SqlDbHelper(context.getApplicationContext());
+        }
+        return sInstance;
+    }
 	
 	public SqlDbHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -112,7 +124,7 @@ public class SqlDbHelper extends SQLiteOpenHelper{
         db.close();
     }
 
-    public void updateUser(User new_user)
+    public void updateUser(User new_user, int userId)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -122,33 +134,32 @@ public class SqlDbHelper extends SQLiteOpenHelper{
         values.put(USER_COLUMN_5, new_user.getGender().ordinal());
         values.put(USER_COLUMN_6, new_user.getHeight());
         values.put(USER_COLUMN_7, new_user.getZipcode());
-        //db.update(DATABASE_TABLE_1, null, values); TODO
+
+        db.update(DATABASE_TABLE_1,values,"user_id=" + userId, null);
         db.close();
     }
 
-    public User viewUser()
+    public User viewUser(int userId)
     {
         User user = new User();
 
         // Select All Query
-		String selectQuery = "SELECT  * FROM " + DATABASE_TABLE_1;
+		String selectQuery = "SELECT * FROM " + DATABASE_TABLE_1 +
+                " WHERE user_id=" + userId;
 
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(selectQuery, null);
 
 		// looping through all rows and adding to list
 		if (cursor.moveToFirst()) {
-			do {
 
-
-                user.setUser_id(Integer.parseInt(cursor.getString(0)));
-                user.setFirst_name(cursor.getString(1));
-                user.setLast_name(cursor.getString(2));
-                user.setDate_of_birth(cursor.getString(3));
-                //user.setGender(cursor.getString(4));
-                user.setHeight(Integer.parseInt(cursor.getString(5)));
-                user.setZipcode(cursor.getString(6));
-			} while (cursor.moveToNext());
+            user.setUser_id(Integer.parseInt(cursor.getString(0)));
+            user.setFirst_name(cursor.getString(1));
+            user.setLast_name(cursor.getString(2));
+            user.setDate_of_birth(cursor.getString(3));
+            user.setGender(Integer.parseInt(cursor.getString(4)));
+            user.setHeight(Integer.parseInt(cursor.getString(5)));
+            user.setZipcode(cursor.getString(6));
 		}
 		cursor.close();
 		db.close();
@@ -156,8 +167,55 @@ public class SqlDbHelper extends SQLiteOpenHelper{
 
         return user;
     }
-	
-	
+
+
+
+
+
+
+    public void addRecord(Record new_record, int user_id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(HISTORY_COLUMN_2, new_record.getWeight());
+        values.put(HISTORY_COLUMN_3, new_record.getBmi());
+        values.put(HISTORY_COLUMN_4, new_record.getDate());
+        values.put(HISTORY_COLUMN_5, user_id);
+        db.insert(DATABASE_TABLE_2, null, values);
+        db.close();
+    }
+
+
+    public Record getLastRecord(int userId)
+    {
+        Record record = new Record();
+
+        // Select All Query
+        String selectQuery = "SELECT * FROM " + DATABASE_TABLE_2 +
+                " WHERE user_id=" + userId + " AND measure_id = (SELECT MAX(measure_id) FROM " +
+                DATABASE_TABLE_2 + ")";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+
+            record.setId(Integer.parseInt(cursor.getString(0)));
+            record.setWeight(Double.parseDouble(cursor.getString(1)));
+            record.setBmi(Double.parseDouble(cursor.getString(2)));
+            record.setDate(cursor.getString(3));
+            record.setUser_id(Integer.parseInt(cursor.getString(4)));
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+
+        return record;
+    }
+
+
+
 //	public List<CourseInfo> getAllItems() {
 //		List<CourseInfo> itemList = new ArrayList<CourseInfo>();
 //

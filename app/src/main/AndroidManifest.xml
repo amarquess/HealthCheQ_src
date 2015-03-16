@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sw551.fairfield.healthcheq" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -14,6 +16,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
         <activity
@@ -59,6 +62,24 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sw551.fairfield.healthcheq.MainActivity" />
+        </activity>
+        <activity
+            android:name=".know_the_facts_child1"
+            android:label="@string/title_activity_know_the_facts_child1"
+            android:parentActivityName=".KnowTheFactsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sw551.fairfield.healthcheq.KnowTheFactsActivity" />
+
+
+        </activity>
+        <activity
+            android:name=".know_the_facts_child2"
+            android:label="@string/title_activity_know_the_facts_child2"
+            android:parentActivityName=".KnowTheFactsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sw551.fairfield.healthcheq.KnowTheFactsActivity" />
         </activity>
     </application>
 

@@ -11,7 +11,7 @@ public class User {
     private String date_of_birth;
     private int age;
     private Gender gender;
-    private double height;
+    private int height;
     private String zip_code;
 
     public void createTestUser()
@@ -64,12 +64,11 @@ public class User {
     public void setAge(int age) {
         this.age = age;
     }
-
-    public double getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
@@ -87,6 +86,22 @@ public class User {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+    public void setGender(int gender) {
+        switch(gender)
+        {
+            case 0:
+                this.gender = Gender.MALE;
+            case 1:
+                this.gender = Gender.FEMALE;
+            default:
+                this.gender = Gender.UNKNOWN;
+        }
+    }
+
+    public String toString()
+    {
+        return first_name + last_name + date_of_birth + height + zip_code;
     }
 }
 

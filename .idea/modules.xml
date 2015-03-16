@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HealthCheQ.iml" filepath="$PROJECT_DIR$/HealthCheQ.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HealthCheQ_src.iml" filepath="$PROJECT_DIR$/HealthCheQ_src.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

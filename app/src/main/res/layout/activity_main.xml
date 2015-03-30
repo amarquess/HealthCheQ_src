@@ -51,9 +51,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="LBS"
+                        android:text=""
                         android:textColor="@color/white"
-                        android:id="@+id/textView5"
+                        android:id="@+id/tv_weight_type"
                         android:layout_gravity="center"
                         android:paddingLeft="100sp" />
 
@@ -62,7 +62,6 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/white"
-                        android:text="Nov 11, 2014"
                         android:id="@+id/tv_date"
                         android:layout_gravity="center_horizontal|bottom"
                         android:paddingBottom="40sp" />
@@ -130,11 +129,26 @@
 
             </LinearLayout>
 
-            <SeekBar
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/seekBar"
-                android:layout_weight="1" />
+                android:layout_weight="1">
+
+                <Space
+                    android:layout_width="100px"
+                    android:layout_height="20px" />
+
+                <SeekBar
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/seekBar"
+                    android:layout_weight="1" />
+
+                <Space
+                    android:layout_width="100px"
+                    android:layout_height="20px" />
+            </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -158,7 +172,6 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/orange"
                     android:textStyle="bold"
-                    android:text="Overweight!"
                     android:onClick="viewWeightInfo"
                     android:id="@+id/tv_weight_info"
                     android:clickable="true"
@@ -171,8 +184,7 @@
                 android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/white"
-                android:text="Your normal weight range would be from 104 to 141 pounds"
-                android:id="@+id/tvBmiInfo"
+                android:id="@+id/tv_weight_range"
                 android:singleLine="false"
                 android:nestedScrollingEnabled="false"
                 android:linksClickable="false"
@@ -198,45 +210,54 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:text="Goals"
+                    android:textStyle="bold"
                     android:onClick="startGoals"
                     android:id="@+id/bt_goals"
                     android:layout_weight="1"
-                    android:textSize="8sp" />
+                    android:textSize="10sp" />
 
                 <Button
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
+                    android:backgroundTint="@color/light_grey"
                     android:text="History"
+                    android:textStyle="bold"
                     android:onClick="startHistory"
                     android:id="@+id/bt_history"
                     android:layout_weight="1"
-                    android:textSize="8sp" />
+                    android:textSize="10sp" />
 
                 <Button
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
+                    android:backgroundTint="@color/light_grey"
                     android:text="Nearby\nPlaces"
+                    android:textStyle="bold"
                     android:onClick="startNearbyPlaces"
                     android:id="@+id/bt_nearby_places"
-                    android:textSize="8sp"
+                    android:textSize="10sp"
                     android:layout_weight="1" />
 
                 <Button
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
+                    android:backgroundTintMode="@color/light_grey"
                     android:text="Know the\nFacts"
+                    android:textStyle="bold"
                     android:onClick="startKnowTheFacts"
                     android:id="@+id/bt_know_the_facts"
-                    android:textSize="8sp"
+                    android:textSize="10sp"
                     android:layout_weight="1" />
 
                 <Button
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
+                    android:backgroundTint="@color/light_grey"
                     android:text="Settings"
+                    android:textStyle="bold"
                     android:onClick="startSettings"
                     android:id="@+id/bt_settings"
-                    android:textSize="8sp"
+                    android:textSize="10sp"
                     android:layout_weight="1" />
             </LinearLayout>
         </LinearLayout>

@@ -38,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:text="Weight Units"
+                android:onClick="selectWeightUnit"
                 android:id="@+id/button5"
                 android:layout_gravity="center_horizontal"
                 android:minWidth="200sp" />
@@ -51,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:text="Edit Profile"
+                android:onClick="viewProfile"
                 android:id="@+id/button6"
                 android:layout_gravity="center_horizontal"
                 android:minWidth="200sp" />

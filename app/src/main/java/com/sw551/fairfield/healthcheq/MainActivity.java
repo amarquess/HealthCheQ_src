@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.sw551.fairfield.healthcheq.withings.WithingsData;
 
+import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,10 +29,15 @@ public class MainActivity extends ActionBarActivity {
     TextView tv_bmi_value;
     TextView tv_weight_info;
     TextView tv_weight_value;
+    TextView tv_weight_range;
     TextView tv_date;
+    TextView tv_weight_type;
+
     SqlDbHelper db = new SqlDbHelper(this);
     Record last_record = new Record();
-    DecimalFormat df = new DecimalFormat("#.##");
+
+
+    DecimalFormat df = new DecimalFormat("#.#");
     SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy");
 
     @Override
@@ -51,8 +57,11 @@ public class MainActivity extends ActionBarActivity {
             tv_bmi_value = (TextView)findViewById(R.id.tv_bmi_value);
             tv_weight_value = (TextView)findViewById(R.id.tv_weight_value);
             tv_date = (TextView)findViewById(R.id.tv_date);
+            tv_weight_range = (TextView)findViewById(R.id.tv_weight_range);
+            tv_weight_type = (TextView)findViewById(R.id.tv_weight_type);
 
             checkLastRecord();
+            updateUserInfo(last_record);
 
 //        }
 //        else
@@ -62,12 +71,19 @@ public class MainActivity extends ActionBarActivity {
 //
 //        }
 
-        //testDB();
+        testDB();
+    }
+
+    @Override
+    protected void onRestart()
+    {
+        super.onRestart();
+        updateUserInfo(last_record);
     }
 
     public void startGoals(View v)
     {
-        Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
+        Intent intent = new Intent(getApplicationContext(),SetGoalsActivity.class);
         startActivity(intent);
     }
 
@@ -97,13 +113,13 @@ public class MainActivity extends ActionBarActivity {
 
     public void viewBmiInfo(View v)
     {
-        Intent intent = new Intent(getApplicationContext(),KnowTheFactsActivity.class);
+        Intent intent = new Intent(getApplicationContext(),know_the_facts_child1.class);
         startActivity(intent);
     }
 
     public void viewWeightInfo(View v)
     {
-        Intent intent = new Intent(getApplicationContext(),KnowTheFactsActivity.class);
+        Intent intent = new Intent(getApplicationContext(),know_the_facts_child2.class);
         startActivity(intent);
     }
 
@@ -141,8 +157,14 @@ public class MainActivity extends ActionBarActivity {
     {
         double bmi;
         double height;
-        User user = new User();
-        user = db.viewUser(1);
+        String weight_name;
+        String weight_type;
+        Bmi.BmiInfo range;
+        User user = db.viewUser(1);
+        double minWeight, maxWeight;
+
+        SharedPreferences settings = getSharedPreferences("AppPrefsFile", 0);
+        boolean isWeightInPounds = settings.getBoolean("isWeightInPounds", true);
 
         //Calendar time = new GregorianCalendar(last_record_db.getDate());
         Date date = new Date(Long.parseLong(last_record_db.getDate())*1000L);
@@ -151,10 +173,60 @@ public class MainActivity extends ActionBarActivity {
 
         bmi = last_record_db.getWeight() / Math.pow(height,2);
 
-        tv_weight_value.setText(String.valueOf(df.format(last_record_db.getWeight())));
+        minWeight = 18.5 * Math.pow(height,2);
+        maxWeight = 25 * Math.pow(height,2);
+
+        if(isWeightInPounds)
+        {
+            weight_type = getResources().getString(R.string.weight_pounds_abbr);
+            weight_name = getResources().getString(R.string.weight_pounds);
+        }
+        else
+        {
+            weight_type = getResources().getString(R.string.weight_kilograms_abbr);
+            weight_name = getResources().getString(R.string.weight_kilograms);
+        }
+
+        tv_weight_type.setText(weight_type);
+        tv_weight_value.setText(String.valueOf(df.format(Bmi.convertWeight(getApplicationContext(),last_record_db.getWeight()))));
         tv_bmi_value.setText(String.valueOf(df.format(bmi)));
         tv_date.setText(String.valueOf(sdf.format(date)));
+        tv_weight_range.setText("Your normal weight range would be from " +
+                df.format(Bmi.convertWeight(getApplicationContext(),minWeight)) +
+                " to "+ df.format(Bmi.convertWeight(getApplicationContext(),maxWeight)) + " " + weight_name);
+
+        range = Bmi.checkBmiRange(bmi);
+        if(range == Bmi.BmiInfo.UNDERWEIGHT)
+        {
+            tv_weight_info.setText(getResources().getString(R.string.bmi_underweight));
+            tv_weight_info.setTextColor(getResources().getColor(R.color.yellow));
+        }
+        else if(range == Bmi.BmiInfo.HEALTHYWEIGHT)
+        {
+            tv_weight_info.setText(getResources().getString(R.string.bmi_healthyweight));
+            tv_weight_info.setTextColor(getResources().getColor(R.color.green));
+        }
+        else if(range == Bmi.BmiInfo.OVERWEIGHT)
+        {
+            tv_weight_info.setText(getResources().getString(R.string.bmi_overweight));
+            tv_weight_info.setTextColor(getResources().getColor(R.color.orange));
+        }
+        else
+        {
+            tv_weight_info.setText(getResources().getString(R.string.bmi_obese));
+            tv_weight_info.setTextColor(getResources().getColor(R.color.red));
+        }
+
+        //tv_weight_info.setText(getResourceId("bmi_"+range.toString().toLowerCase(), R.string.class));
+
+
+
+
+
+
+
     }
+
 
     public boolean userDataCreated()
     {
@@ -230,6 +302,27 @@ public class MainActivity extends ActionBarActivity {
         return calendar;
     }
 
+
+    @SuppressWarnings("rawtypes")
+    public static int getResourceId(String name,  Class resType){
+
+        try {
+            Class res = null;
+            if(resType == R.drawable.class)
+                res = R.drawable.class;
+            if(resType == R.id.class)
+                res = R.id.class;
+            if(resType == R.string.class)
+                res = R.string.class;
+            Field field = res.getField(name);
+            int retId = field.getInt(null);
+            return retId;
+        }
+        catch (Exception e) {
+            // Log.d(TAG, "Failure to get drawable id.", e);
+        }
+        return 0;
+    }
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {

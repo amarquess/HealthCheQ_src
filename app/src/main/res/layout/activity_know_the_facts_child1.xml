@@ -29,13 +29,16 @@
     </LinearLayout>
 
     <ImageView
-        android:layout_width="250dp"
-        android:layout_height="150dp"
+        android:layout_width="260dp"
+        android:layout_height="160dp"
         android:id="@+id/imageView2"
-        android:src="@drawable/bmi"
+        android:src="@drawable/bmi1"
         android:scrollbars="vertical"
         android:layout_below="@+id/linearLayout"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignLeft="@+id/xyz"
+        android:layout_alignStart="@+id/xyz"
+        android:layout_alignRight="@+id/xyz"
+        android:layout_alignEnd="@+id/xyz" />
 
     <ScrollView
         android:layout_width="wrap_content"

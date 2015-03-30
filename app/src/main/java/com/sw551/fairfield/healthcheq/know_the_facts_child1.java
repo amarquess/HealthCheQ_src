@@ -15,7 +15,7 @@ public class know_the_facts_child1 extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_know_the_facts_child1);
         textView=(TextView) findViewById(R.id.textView3);
-        textView.setText(Html.fromHtml("<p>Health consequences of overweight and obesity in adults[edit] The BMI ranges are based on the relationship between body weight and disease and death. Overweight and obese individuals are at an increased risk for many diseases and health conditions, including the following:  Hypertension Dyslipidemia (for example, high LDL cholesterol, low HDL cholesterol, or high levels of triglycerides) Type 2 diabetes Coronary heart disease Stroke Gallbladder disease Osteoarthritis Sleep apnea and respiratory problems At least 10 cancers (including endometrial, breast, and colon). </p>"));
+        textView.setText(Html.fromHtml("<p>Health consequences of overweight and obesity in adults. The BMI ranges are based on the relationship between body weight and disease and death. <br><br> Overweight and obese individuals are at an increased risk for many diseases and health conditions, including the following:  <br><b> - </b> Hypertension Dyslipidemia (for example, high LDL cholesterol, low HDL cholesterol, or high levels of triglycerides) <br><br><b> - </b> Type 2 diabetes Coronary heart disease Stroke Gallbladder disease Osteoarthritis Sleep apnea and respiratory problems At least 10 cancers (including endometrial, breast, and colon). </p>"));
     }
 
 

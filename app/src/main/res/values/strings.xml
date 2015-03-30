@@ -22,6 +22,7 @@
     <color name="yellow">#F6F627</color>
     <color name="dark_blue">#035058</color>
     <color name="light_blue">#00BCD5</color>
+    <color name="black">#000000</color>
 
     <string name="title_activity_know_the_facts_child1">Body Mass Index</string>
     <string name="kyf">Body Mass Index</string>

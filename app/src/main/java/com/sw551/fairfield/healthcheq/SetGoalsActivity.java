@@ -4,14 +4,36 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 
 public class SetGoalsActivity extends ActionBarActivity {
+
+    Spinner goalWeight, goalTime, goalMotive ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_goals);
+        goalWeight = (Spinner)findViewById(R.id.spinnerWeight);
+        Integer[] itemsWeight = new Integer[]{5,10,15,20,25};
+        ArrayAdapter<Integer> adapterWeight = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, itemsWeight);
+        goalWeight.setAdapter(adapterWeight);
+        goalTime = (Spinner)findViewById(R.id.spinnerTime);
+        Integer[] itemsTime = new Integer[]{1,2,3,4,5,6,7,8,9,10,11,12};
+        ArrayAdapter<Integer> adapterTime = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, itemsTime);
+        goalTime.setAdapter(adapterTime);
+        goalMotive = (Spinner)findViewById(R.id.spinnerMotive);
+        String[] itemsMotive = new String[]{"look the best I can","improve my health","improve my self esteem","live longer","increase my energy levels"};
+        ArrayAdapter<String> adapterMotive = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, itemsMotive);
+        goalMotive.setAdapter(adapterMotive);
+    }
+
+    public void submitGoal(View v)
+    {
+        /*TBD*/
     }
 
 

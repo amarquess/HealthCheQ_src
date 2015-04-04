@@ -198,7 +198,6 @@ public class SqlDbHelper extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
 
             record.setId(Integer.parseInt(cursor.getString(0)));
@@ -212,6 +211,37 @@ public class SqlDbHelper extends SQLiteOpenHelper{
         // return contact list
 
         return record;
+    }
+
+    public ArrayList<Record> getAllRecord(int userId)
+    {
+        ArrayList<Record> recordList = new ArrayList<>();
+
+        // Select All Query
+        String selectQuery = "SELECT * FROM " + DATABASE_TABLE_2;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        	if (cursor.moveToFirst()) {
+			    do {
+                    Record record = new Record();
+                    record.setId(Integer.parseInt(cursor.getString(0)));
+                    record.setWeight(Double.parseDouble(cursor.getString(1)));
+                    record.setBmi(Double.parseDouble(cursor.getString(2)));
+                    record.setDate(cursor.getString(3));
+                    record.setUser_id(Integer.parseInt(cursor.getString(4)));
+
+                    recordList.add(record);
+
+                } while (cursor.moveToNext());
+            }
+        cursor.close();
+        db.close();
+        // return contact list
+
+        return recordList;
     }
 
 

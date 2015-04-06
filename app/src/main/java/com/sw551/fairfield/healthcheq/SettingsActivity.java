@@ -28,12 +28,24 @@ public class SettingsActivity extends ActionBarActivity {
 
 
         tvTest = (TextView)findViewById(R.id.textViewTest);
-        //tvTest = (TextView)findViewById(R.id.textViewTest);
 
         //User userTest;
         //userTest = db.viewUser(1);
 
         //tvTest.setText(userTest.toString());
+
+
+        //Testing getAllRecord method
+        ArrayList<Record> allRecordsTest;
+        String recordsOutputTest = "";
+        allRecordsTest = db.getAllRecord(1);
+
+        for(Record item : allRecordsTest)
+        {
+            recordsOutputTest = recordsOutputTest.concat(item.toString());
+        }
+        tvTest.setText(recordsOutputTest);
+
 
 
         //TODO put the code below after user info was added

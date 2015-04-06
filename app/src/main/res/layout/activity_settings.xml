@@ -6,8 +6,7 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-
-        android:background="@drawable/healthcheq">
+        android:background="@color/blue">
 
         <FrameLayout
             android:layout_width="fill_parent"
@@ -25,6 +24,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:text="Add Scale"
+                android:textColor="@color/black"
                 android:onClick="addScale"
                 android:id="@+id/button4"
                 android:layout_gravity="center_horizontal"
@@ -32,7 +32,6 @@
 
             <Space
                 android:layout_width="20px"
-
                 android:layout_height="40px" />
 
             <Button
@@ -40,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:text="Weight Units"
+                android:textColor="@color/black"
                 android:onClick="selectWeightUnit"
                 android:id="@+id/button5"
                 android:layout_gravity="center_horizontal"
@@ -54,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:text="Edit Profile"
+                android:textColor="@color/black"
                 android:onClick="viewProfile"
                 android:id="@+id/button6"
                 android:layout_gravity="center_horizontal"
@@ -68,6 +69,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:text="Help"
+                android:textColor="@color/black"
+                android:onClick="viewHelp"
                 android:id="@+id/button7"
                 android:layout_gravity="center_horizontal"
                 android:minWidth="200sp" />

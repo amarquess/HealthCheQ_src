@@ -44,34 +44,30 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        if(userDataCreated())
-//        {
-            setContentView(R.layout.activity_main);
+        if(!userDataCreated())
+        {
+            finish();
+            Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
+            startActivity(intent);
+        }
+        setContentView(R.layout.activity_main);
 
-            tv_bmi_info = (TextView)findViewById(R.id.tv_bmi_info);
-            tv_bmi_info.setPaintFlags(tv_bmi_info.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        tv_bmi_info = (TextView)findViewById(R.id.tv_bmi_info);
+        tv_bmi_info.setPaintFlags(tv_bmi_info.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
-            tv_weight_info = (TextView)findViewById(R.id.tv_weight_info);
-            tv_weight_info.setPaintFlags(tv_weight_info.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        tv_weight_info = (TextView)findViewById(R.id.tv_weight_info);
+        tv_weight_info.setPaintFlags(tv_weight_info.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
-            tv_bmi_value = (TextView)findViewById(R.id.tv_bmi_value);
-            tv_weight_value = (TextView)findViewById(R.id.tv_weight_value);
-            tv_date = (TextView)findViewById(R.id.tv_date);
-            tv_weight_range = (TextView)findViewById(R.id.tv_weight_range);
-            tv_weight_type = (TextView)findViewById(R.id.tv_weight_type);
+        tv_bmi_value = (TextView)findViewById(R.id.tv_bmi_value);
+        tv_weight_value = (TextView)findViewById(R.id.tv_weight_value);
+        tv_date = (TextView)findViewById(R.id.tv_date);
+        tv_weight_range = (TextView)findViewById(R.id.tv_weight_range);
+        tv_weight_type = (TextView)findViewById(R.id.tv_weight_type);
 
-            checkLastRecord();
-            updateUserInfo(last_record);
+        checkLastRecord();
+        updateUserInfo(last_record);
 
-//        }
-//        else
-//        {
-//            Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
-//            startActivity(intent);
-//
-//        }
-
-        testDB();
+        //testDB();
     }
 
     @Override

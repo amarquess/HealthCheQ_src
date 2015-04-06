@@ -23,6 +23,7 @@
         <activity
             android:name=".SetGoalsActivity"
             android:label="@string/title_activity_set_goals"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -31,6 +32,7 @@
         <activity
             android:name=".HistoryActivity"
             android:label="@string/title_activity_history"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -43,6 +45,7 @@
         <activity
             android:name=".NearbyPlacesActivity"
             android:label="@string/title_activity_nearby_places"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -51,6 +54,7 @@
         <activity
             android:name=".KnowTheFactsActivity"
             android:label="@string/title_activity_know_the_facts"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -59,6 +63,7 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -67,6 +72,7 @@
         <activity
             android:name=".know_the_facts_child1"
             android:label="@string/title_activity_know_the_facts_child1"
+            android:screenOrientation="portrait"
             android:parentActivityName=".KnowTheFactsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -77,6 +83,7 @@
         <activity
             android:name=".know_the_facts_child2"
             android:label="@string/title_activity_know_the_facts_child2"
+            android:screenOrientation="portrait"
             android:parentActivityName=".KnowTheFactsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -31,30 +31,18 @@ public class SettingsActivity extends ActionBarActivity {
 
         //User userTest;
         //userTest = db.viewUser(1);
-
         //tvTest.setText(userTest.toString());
 
-
         //Testing getAllRecord method
-        ArrayList<Record> allRecordsTest;
-        String recordsOutputTest = "";
-        allRecordsTest = db.getAllRecord(1);
-
-        for(Record item : allRecordsTest)
-        {
-            recordsOutputTest = recordsOutputTest.concat(item.toString());
-        }
-        tvTest.setText(recordsOutputTest);
-
-
-
-        //TODO put the code below after user info was added
-        SharedPreferences settings = getSharedPreferences("AppPrefsFile", 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putBoolean("isUserCreated", true);
-        editor.commit();
-
-
+//        ArrayList<Record> allRecordsTest;
+//        String recordsOutputTest = "";
+//        allRecordsTest = db.getAllRecord(1);
+//
+//        for(Record item : allRecordsTest)
+//        {
+//            recordsOutputTest = re    cordsOutputTest.concat(item.toString());
+//        }
+//        tvTest.setText(recordsOutputTest);
     }
 
     public void addScale(View v)
@@ -115,6 +103,11 @@ public class SettingsActivity extends ActionBarActivity {
     {
         Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
         startActivity(intent);
+    }
+
+    public void viewHelp(View v)
+    {
+        //TODO help tutorial
     }
 
 

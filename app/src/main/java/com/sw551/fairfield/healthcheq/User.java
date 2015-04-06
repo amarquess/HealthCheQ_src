@@ -18,9 +18,9 @@ public class User {
     {
         this.first_name = "John";
         this.last_name = "Doe";
-        this.date_of_birth = "1992-05-19";
+        this.date_of_birth = "05-19-1992";
         this.gender = Gender.MALE;
-        this.height = 176;
+        this.height = 189;
         this.zip_code = "06230";
 
     }
@@ -92,10 +92,13 @@ public class User {
         {
             case 0:
                 this.gender = Gender.MALE;
+                break;
             case 1:
                 this.gender = Gender.FEMALE;
+                break;
             default:
                 this.gender = Gender.UNKNOWN;
+                break;
         }
     }
 

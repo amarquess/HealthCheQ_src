@@ -6,7 +6,8 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/blue">
+
+        android:background="@drawable/healthcheq">
 
         <FrameLayout
             android:layout_width="fill_parent"
@@ -31,6 +32,7 @@
 
             <Space
                 android:layout_width="20px"
+
                 android:layout_height="40px" />
 
             <Button

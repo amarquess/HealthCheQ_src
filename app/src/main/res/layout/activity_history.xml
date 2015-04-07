@@ -10,10 +10,10 @@
     <com.androidplot.xy.XYPlot
         android:id="@+id/mySimpleXYPlot"
         android:layout_width="wrap_content"
-        android:layout_height="450dp"
+        android:layout_height="420dp"
         androidPlot.title="BMI History"
-        androidPlot.domainLabel="weight"
-        androidPlot.rangeLabel="height"
+        androidPlot.domainLabel="date"
+        androidPlot.rangeLabel="weight"
         androidPlot.titleWidget.labelPaint.textSize="20sp"
         androidPlot.domainLabelWidget.labelPaint.textSize="13sp"
         androidPlot.rangeLabelWidget.labelPaint.textSize="13sp"

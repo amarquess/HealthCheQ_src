@@ -18,6 +18,7 @@ import java.util.Arrays;
 public class HistoryActivity extends ActionBarActivity {
 
     private XYPlot plot;
+    SqlDbHelper db = new SqlDbHelper(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +26,8 @@ public class HistoryActivity extends ActionBarActivity {
         plot=(XYPlot)findViewById(R.id.mySimpleXYPlot);
         Number[] series1={10,8,6,4,2};
         Number[] series2={4,6,3,8,2};
-        XYSeries xys1=new SimpleXYSeries(Arrays.asList(series1),SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,"Weight");
-        XYSeries xys2=new SimpleXYSeries(Arrays.asList(series2),SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,"Weight");
+        XYSeries xys1=new SimpleXYSeries(Arrays.asList(series1),SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,"goal");
+        XYSeries xys2=new SimpleXYSeries(Arrays.asList(series2),SimpleXYSeries.ArrayFormat.Y_VALS_ONLY,"me");
         LineAndPointFormatter sf1=new LineAndPointFormatter();
         sf1.setPointLabelFormatter(new PointLabelFormatter());
         sf1.configure(getApplicationContext(),R.xml.line_plf1);

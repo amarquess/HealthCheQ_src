@@ -107,6 +107,7 @@ public class SettingsActivity extends ActionBarActivity {
 
     public void viewHelp(View v)
     {
+        db.deleteAllRecord();
         //TODO help tutorial
     }
 

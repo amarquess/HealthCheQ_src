@@ -306,6 +306,14 @@ public class SqlDbHelper extends SQLiteOpenHelper{
         return recordList;
     }
 
+    public void deleteAllRecord()
+    {
+        SQLiteDatabase db= this.getWritableDatabase();
+        db.delete(DATABASE_TABLE_2, null, null);
+        db.close();
+
+    }
+
 
 
 //	public List<CourseInfo> getAllItems() {

@@ -120,7 +120,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void viewFacebookGroup(View v) {
-        Uri facebook_url = Uri.parse("http://www.facebook.com");
+        Uri facebook_url = Uri.parse("https://www.facebook.com/HealthcheQ.community");
         Intent intent = new Intent(Intent.ACTION_VIEW, facebook_url);
         if (intent.resolveActivity(getPackageManager()) != null)
         {

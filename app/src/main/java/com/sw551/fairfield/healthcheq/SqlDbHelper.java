@@ -44,9 +44,11 @@ public class SqlDbHelper extends SQLiteOpenHelper{
 
     public static final String GOAL_COLUMN_1 = "goal_id";
     public static final String GOAL_COLUMN_2 = "current_weight";
-    public static final String GOAL_COLUMN_3 = "target_weight";
-    public static final String GOAL_COLUMN_4 = "target_date";
-    public static final String GOAL_COLUMN_5 = "user_id";
+    public static final String GOAL_COLUMN_3 = "current_date";
+    public static final String GOAL_COLUMN_4 = "target_weight";
+    public static final String GOAL_COLUMN_5 = "target_date";
+    public static final String GOAL_COLUMN_6 = "phrase_number";
+    public static final String GOAL_COLUMN_7 = "user_id";
 
 	String SCRIPT_CREATE_DATABASE_1 = "CREATE TABLE " + DATABASE_TABLE_1 + "("
 			+ USER_COLUMN_1 + " INTEGER PRIMARY KEY," + USER_COLUMN_2 + " TEXT,"
@@ -65,9 +67,9 @@ public class SqlDbHelper extends SQLiteOpenHelper{
             + BMI_COLUMN_5 + " INTEGER" + ")";
 
     String SCRIPT_CREATE_DATABASE_4 = "CREATE TABLE " + DATABASE_TABLE_4 + "("
-            + GOAL_COLUMN_1 + " INTEGER PRIMARY KEY," + GOAL_COLUMN_2 + " INTEGER,"
-            + GOAL_COLUMN_3 + " INTEGER," + GOAL_COLUMN_4 + " TEXT,"
-            + GOAL_COLUMN_5 + " INTEGER" + ")";
+            + GOAL_COLUMN_1 + " INTEGER PRIMARY KEY," + GOAL_COLUMN_2 + " REAL,"
+            + GOAL_COLUMN_3 + " TEXT," + GOAL_COLUMN_4 + " REAL," + GOAL_COLUMN_5 + " TEXT,"
+            + GOAL_COLUMN_6 + " INTEGER," + GOAL_COLUMN_7 + " INTEGER" + ")";
 
 
     public static SqlDbHelper getInstance(Context context) {
@@ -166,6 +168,66 @@ public class SqlDbHelper extends SQLiteOpenHelper{
 		// return contact list
 
         return user;
+    }
+
+
+
+    public void setNewGoal(Goal new_goal)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(GOAL_COLUMN_2, new_goal.getStart_weight());
+        values.put(GOAL_COLUMN_3, new_goal.getStart_date());
+        values.put(GOAL_COLUMN_4, new_goal.getTarget_weight());
+        values.put(GOAL_COLUMN_5, new_goal.getTarget_date());
+        values.put(GOAL_COLUMN_6, new_goal.getPhrase_number());
+        values.put(GOAL_COLUMN_7, new_goal.getUser_id());
+        db.insert(DATABASE_TABLE_4, null, values);
+        db.close();
+    }
+
+    public void updateGoal(Goal new_goal)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(GOAL_COLUMN_2, new_goal.getStart_weight());
+        values.put(GOAL_COLUMN_3, new_goal.getStart_date());
+        values.put(GOAL_COLUMN_4, new_goal.getTarget_weight());
+        values.put(GOAL_COLUMN_5, new_goal.getTarget_date());
+        values.put(GOAL_COLUMN_6, new_goal.getPhrase_number());
+        values.put(GOAL_COLUMN_7, new_goal.getUser_id());
+
+        db.update(DATABASE_TABLE_4,values,"user_id=" + new_goal.getUser_id(), null);
+        db.close();
+    }
+
+    public Goal viewGoal(int userId)
+    {
+        Goal goal = new Goal();
+
+        // Select All Query
+        String selectQuery = "SELECT * FROM " + DATABASE_TABLE_4 +
+                " WHERE user_id=" + userId;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+
+            goal.setId(Integer.parseInt(cursor.getString(0)));
+            goal.setStart_weight(Double.parseDouble(cursor.getString(1)));
+            goal.setStart_date(cursor.getString(2));
+            goal.setTarget_weight(Double.parseDouble(cursor.getString(3)));
+            goal.setTarget_date(cursor.getString(4));
+            goal.setPhrase_number(Integer.parseInt(cursor.getString(5)));
+            goal.setUser_id(Integer.parseInt(cursor.getString(6)));
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+
+        return goal;
     }
 
 

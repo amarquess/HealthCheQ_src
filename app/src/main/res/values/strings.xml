@@ -28,6 +28,7 @@
     <string name="kyf">Body Mass Index</string>
     <string name="title_activity_know_the_facts_child2">Health Tips</string>
     <string name="kyc2">Health Tips</string>
+
     <string name="bmi_underweight">Underweight!</string>
     <string name="bmi_healthyweight">Health Weight!</string>
     <string name="bmi_overweight">Overweight!</string>
@@ -36,8 +37,10 @@
     <string name="weight_pounds_abbr">LBS</string>
     <string name="weight_kilograms">kilograms</string>
     <string name="weight_kilograms_abbr">KG</string>
+
     <string name="settings_weight_title">Select your weight unit</string>
-    <string name="title_activity_example1">Example1</string>
-    <string name="hello_world">Hello world!</string>
+
+
+
 
 </resources>

@@ -1,26 +1,23 @@
 package com.sw551.fairfield.healthcheq.withings;
 
+import org.scribe.builder.ServiceBuilder;
 import org.scribe.model.OAuthRequest;
 import org.scribe.model.Response;
+import org.scribe.model.SignatureType;
+import org.scribe.model.Token;
 import org.scribe.model.Verb;
+import org.scribe.oauth.OAuthService;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
 import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
-import com.sw551.fairfield.healthcheq.MainActivity;
-import com.sw551.fairfield.healthcheq.R;
-import com.sw551.fairfield.healthcheq.SettingsActivity;
+
 import com.sw551.fairfield.healthcheq.Record;
 import com.sw551.fairfield.healthcheq.SqlDbHelper;
 
@@ -36,6 +33,13 @@ public class WithingsData extends AsyncTask<Void, Integer, ArrayList<Record>>
     private final Gson gson;
     private final JsonParser jsonParser;
 
+    String apiKey = "1db033576b61cb595e9e15d964f021fb9743bb3b626914d7ef6eff4e6";
+    String apiSecret = "3692332b4244dbfc18eec29c6e001b07e1f78000993e41c74df3e64fd54c1";
+    OAuthService service;
+    static String userId;
+    static Token accessToken;
+
+
 
     public WithingsData(Context context) {
 
@@ -43,13 +47,12 @@ public class WithingsData extends AsyncTask<Void, Integer, ArrayList<Record>>
         this.gson = createGsonBuilder().create();
         this.jsonParser = new JsonParser();
     }
-    
-//    public static void recordAndAlignTask(TextView mainTextView) {
-//        tv = mainTextView;
-//    }
 
-    public static void recordAndAlignTask(TextView mainTextView) {
-        tv = mainTextView;
+
+    public static void recordAndAlignTask(String withingsUserId, Token acToken) {
+        //tv = mainTextView;
+        userId = withingsUserId;
+        accessToken = acToken;
     }
 
 	@Override
@@ -57,17 +60,25 @@ public class WithingsData extends AsyncTask<Void, Integer, ArrayList<Record>>
 
 		String output = "";
         ArrayList<Record> output_records;
-		
-		OAuthRequest request = new OAuthRequest(Verb.GET, "http://wbsapi.withings.net/measure?action=getmeas&userid=4991622&oauth_consumer_key=1db033576b61cb595e9e15d964f021fb9743bb3b626914d7ef6eff4e6&oauth_nonce=df3a3adeaba1d7214abb36729c84dc4b&oauth_signature=wKfDRPJcx0x1CPtwgx%2BgZl2hi%2BU%3D&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1415862994&oauth_token=de21b24f332959d963918cce14e620990097e026fd42cf687bbe5e9c48&oauth_version=1.0");
-		
-		Response response = request.send();
+
+        service = new ServiceBuilder()
+                .provider(WithingsApi.class)
+                .apiKey(apiKey).apiSecret(apiSecret)
+                .signatureType(SignatureType.QueryString)
+                .build();
+
+        OAuthRequest request = new OAuthRequest(Verb.GET, "http://wbsapi.withings.net/measure");
+        request.addQuerystringParameter("userid", userId);
+        request.addQuerystringParameter("action", "getmeas");
+        service.signRequest(accessToken, request);
+
+        //OAuthRequest request = new OAuthRequest(Verb.GET, "http://wbsapi.withings.net/measure?action=getmeas&userid=4991622&oauth_consumer_key=1db033576b61cb595e9e15d964f021fb9743bb3b626914d7ef6eff4e6&oauth_nonce=df3a3adeaba1d7214abb36729c84dc4b&oauth_signature=wKfDRPJcx0x1CPtwgx%2BgZl2hi%2BU%3D&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1415862994&oauth_token=de21b24f332959d963918cce14e620990097e026fd42cf687bbe5e9c48&oauth_version=1.0");
+
+        Response response = request.send();
 		output = response.getBody();
 
         output_records = convertData(output);
-		
-		
-		
-		// TODO Auto-generated method stub
+
 		return output_records;
 	}
 
@@ -82,10 +93,6 @@ public class WithingsData extends AsyncTask<Void, Integer, ArrayList<Record>>
 
         //override in MainActivity.java
 
-        //cleanInvalidRecords(result);
-
-        //MainActivity.updateUserInfo(addRecordsOnDB(result));
-        //SettingsActivity.testDisplayWeight(result);
     }
 
     private ArrayList convertData(String withings_records)

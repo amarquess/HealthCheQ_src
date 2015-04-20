@@ -23,9 +23,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:text="Add Scale"
+                android:text="Connect Withings"
                 android:textColor="@color/black"
-                android:onClick="addScale"
+                android:onClick="connectScaleServer"
                 android:id="@+id/button4"
                 android:layout_gravity="center_horizontal"
                 android:minWidth="200sp" />

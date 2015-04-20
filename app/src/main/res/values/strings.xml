@@ -39,6 +39,7 @@
     <string name="weight_kilograms_abbr">KG</string>
 
     <string name="settings_weight_title">Select your weight unit</string>
+    <string name="title_activity_auth">Connect Withings</string>
 
 
 

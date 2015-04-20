@@ -10,8 +10,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sw551.fairfield.healthcheq.withings.WithingsData;
+
+import org.scribe.model.Token;
 
 import java.lang.reflect.Field;
 import java.text.DecimalFormat;
@@ -130,23 +133,40 @@ public class MainActivity extends ActionBarActivity {
 
     public void getUserData(View v)
     {
-
+        SharedPreferences settings = getSharedPreferences("AppPrefsFile", 0);
         ArrayList<Record> records = new ArrayList<>();
-        WithingsData data = new WithingsData(this){
-            @Override
-            protected void onPostExecute(ArrayList<Record> result)
-            {
-                //Now you can update the UI here
-                cleanInvalidRecords(result);
-                addRecordsOnDB(result);
-                checkLastRecord();
-                updateUserInfo(last_record);
-            }
-        };
-        //tvTest = (TextView)findViewById(R.id.textViewTest);
-        //data.recordAndAlignTask(tvTest);
-        data.execute();
-        // TODO Refresh Data
+        if(settings.getString("withings_user", "").isEmpty())
+        {
+            Toast.makeText(getApplicationContext(), "Connect to the server in:\nSettings > Connect Withings", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            WithingsData data = new WithingsData(this){
+                @Override
+                protected void onPostExecute(ArrayList<Record> result)
+                {
+                    //Now you can update the UI here
+                    cleanInvalidRecords(result);
+                    addRecordsOnDB(result);
+                    checkLastRecord();
+                    updateUserInfo(last_record);
+
+                    Toast.makeText(getApplicationContext(), "Information Updated", Toast.LENGTH_SHORT).show();
+                }
+            };
+            //tvTest = (TextView)findViewById(R.id.textViewTest);
+            //data.recordAndAlignTask(tvTest);
+
+            String withingsUser = settings.getString("withings_user", "");
+            String acTokenString = settings.getString("accessToken", "");
+            String acTokenSecretString = settings.getString("accessTokenSecret", "");
+
+            Token accessToken = new Token(acTokenString, acTokenSecretString);
+
+            data.recordAndAlignTask(withingsUser, accessToken);
+            data.execute();
+        }
+
     }
 
     public void updateUserInfo(Record last_record_db)

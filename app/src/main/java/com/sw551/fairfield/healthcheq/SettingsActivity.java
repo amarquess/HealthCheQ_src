@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.sw551.fairfield.healthcheq.withings.WithingsData;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class SettingsActivity extends ActionBarActivity {
@@ -45,19 +47,11 @@ public class SettingsActivity extends ActionBarActivity {
 //        tvTest.setText(recordsOutputTest);
     }
 
-    public void addScale(View v)
+    public void connectScaleServer(View v)
     {
-        //ArrayList<Record> records = new ArrayList<>();
-        //WithingsData data = new WithingsData(this);
 
-
-        //data.recordAndAlignTask(records);
-        //data.recordAndAlignTask(tvTest);
-        //data.execute();
-
-
-
-
+        Intent intent = new Intent(SettingsActivity.this,AuthActivity.class);
+        startActivity(intent);
 
         // TODO add scale config
     }
@@ -107,7 +101,16 @@ public class SettingsActivity extends ActionBarActivity {
 
     public void viewHelp(View v)
     {
-        db.deleteAllRecord();
+        Record test_record = db.getLastRecord(1);
+
+
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(Long.parseLong(test_record.getDate())*1000L);
+
+        Date date = new Date(Long.parseLong(test_record.getDate())*1000L);
+
+        tvTest.setText(date.toString());
+
         //TODO help tutorial
     }
 

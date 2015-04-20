@@ -1,17 +1,50 @@
 package com.sw551.fairfield.healthcheq;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.view.View;
+import android.widget.Button;
 
 public class NearbyPlacesActivity extends ActionBarActivity {
+
+    public Button btnFitness, btnHealth, btnFood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nearby_places);
+
+        btnFitness=(Button)findViewById(R.id.buttonFitness);
+        btnHealth=(Button)findViewById(R.id.buttonHealth);
+        btnFood=(Button)findViewById(R.id.buttonFood);
+
+        btnFitness.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*Intent intent23=new Intent(NearbyPlacesActivity.this,know_the_facts_child1.class);
+                startActivity(intent23);*/
+
+            }
+        });
+
+        btnHealth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*Intent intent23=new Intent(NearbyPlacesActivity.this,know_the_facts_child2.class);
+                startActivity(intent23);*/
+            }
+        });
+
+        btnFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              /*  Intent intent23=new Intent(NearbyPlacesActivity.this,know_the_facts_child2.class);
+                startActivity(intent23);*/
+            }
+        });
     }
 
 

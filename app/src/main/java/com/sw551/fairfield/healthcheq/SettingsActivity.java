@@ -101,17 +101,8 @@ public class SettingsActivity extends ActionBarActivity {
 
     public void viewHelp(View v)
     {
-        Record test_record = db.getLastRecord(1);
-
-
-        Calendar c = Calendar.getInstance();
-        c.setTimeInMillis(Long.parseLong(test_record.getDate())*1000L);
-
-        Date date = new Date(Long.parseLong(test_record.getDate())*1000L);
-
-        tvTest.setText(date.toString());
-
-        //TODO help tutorial
+        Intent intent = new Intent(getApplicationContext(),HelpActivity.class);
+        startActivity(intent);
     }
 
 

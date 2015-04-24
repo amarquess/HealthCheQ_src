@@ -1,0 +1,86 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sw551.fairfield.healthcheq.AboutActivity"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.5"></FrameLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:background="@drawable/healthcheq2"></FrameLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:layout_gravity="center">
+
+        <Space
+            android:layout_width="50px"
+            android:layout_height="50px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/version"
+            android:textColor="@color/black"
+            android:id="@+id/textView9"
+            android:layout_gravity="center" />
+
+        <Space
+            android:layout_width="50px"
+            android:layout_height="50px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Fairfield University"
+            android:textColor="@color/black"
+            android:id="@+id/textView10"
+            android:layout_gravity="center"/>
+
+        <Space
+            android:layout_width="50px"
+            android:layout_height="80px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Andre Marques da Silva"
+            android:textColor="@color/black"
+            android:id="@+id/textView11"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Megha Chandrashekharappa"
+            android:textColor="@color/black"
+            android:id="@+id/textView12"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Radha Krishna Reddy Chinthala"
+            android:textColor="@color/black"
+            android:id="@+id/textView13"
+            android:layout_gravity="center" />
+
+    </LinearLayout>
+
+</LinearLayout>

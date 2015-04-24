@@ -23,8 +23,8 @@
         <activity
             android:name=".SetGoalsActivity"
             android:label="@string/title_activity_set_goals"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sw551.fairfield.healthcheq.MainActivity" />
@@ -32,8 +32,8 @@
         <activity
             android:name=".HistoryActivity"
             android:label="@string/title_activity_history"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sw551.fairfield.healthcheq.MainActivity" />
@@ -46,8 +46,8 @@
         <activity
             android:name=".NearbyPlacesActivity"
             android:label="@string/title_activity_nearby_places"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sw551.fairfield.healthcheq.MainActivity" />
@@ -55,8 +55,8 @@
         <activity
             android:name=".KnowTheFactsActivity"
             android:label="@string/title_activity_know_the_facts"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sw551.fairfield.healthcheq.MainActivity" />
@@ -64,8 +64,8 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sw551.fairfield.healthcheq.MainActivity" />
@@ -73,8 +73,8 @@
         <activity
             android:name=".know_the_facts_child1"
             android:label="@string/title_activity_know_the_facts_child1"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".KnowTheFactsActivity" >
+            android:parentActivityName=".KnowTheFactsActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sw551.fairfield.healthcheq.KnowTheFactsActivity" />
@@ -82,8 +82,8 @@
         <activity
             android:name=".know_the_facts_child2"
             android:label="@string/title_activity_know_the_facts_child2"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".KnowTheFactsActivity" >
+            android:parentActivityName=".KnowTheFactsActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sw551.fairfield.healthcheq.KnowTheFactsActivity" />
@@ -96,6 +96,42 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.sw551.fairfield.healthcheq.SettingsActivity" />
+        </activity>
+        <activity
+            android:name=".HelpActivity"
+            android:label="@string/title_activity_help"
+            android:parentActivityName=".SettingsActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sw551.fairfield.healthcheq.SettingsActivity" />
+        </activity>
+        <activity
+            android:name=".ProfileSetupActivity"
+            android:label="@string/title_activity_profile_setup"
+            android:parentActivityName=".HelpActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sw551.fairfield.healthcheq.HelpActivity" />
+        </activity>
+        <activity
+            android:name=".GoalSetupActivity"
+            android:label="@string/title_activity_goal_setup"
+            android:parentActivityName=".HelpActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sw551.fairfield.healthcheq.HelpActivity" />
+        </activity>
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/title_activity_about"
+            android:parentActivityName=".HelpActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sw551.fairfield.healthcheq.HelpActivity" />
         </activity>
     </application>
 

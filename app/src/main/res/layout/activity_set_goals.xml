@@ -119,12 +119,12 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Save"
+                android:text="Cancel"
                 android:textColor="@color/white"
-                android:background="@color/green"
-                android:id="@+id/buttonSave"
-                android:onClick="submitGoal"
-                android:layout_weight="0.18" />
+                android:background="@color/red"
+                android:id="@+id/buttonCancel"
+                android:onClick="goHome"
+                android:layout_gravity="center_horizontal" />
 
             <Space
                 android:layout_width="20px"
@@ -133,12 +133,14 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cancel"
+                android:text="Save"
                 android:textColor="@color/white"
-                android:background="@color/red"
-                android:id="@+id/buttonCancel"
-                android:onClick="goHome"
-                android:layout_gravity="center_horizontal" />
+                android:background="@color/green"
+                android:id="@+id/buttonSave"
+                android:onClick="submitGoal"
+                android:layout_weight="0.18" />
+
+
 
 
         </LinearLayout>

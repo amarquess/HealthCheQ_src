@@ -1,5 +1,7 @@
 package com.sw551.fairfield.healthcheq;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.LinearGradient;
@@ -11,7 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.PointLabelFormatter;
 import com.androidplot.xy.PointLabeler;
@@ -34,6 +38,9 @@ import java.util.Date;
 public class HistoryActivity extends ActionBarActivity {
 private Button button;
     private XYPlot plot1;
+    private TextView tvNoData;
+    int minWeight = 999;
+    int maxWeight = 0;
     SqlDbHelper db = new SqlDbHelper(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +48,49 @@ private Button button;
         setContentView(R.layout.activity_history);
         plot1=(XYPlot)findViewById(R.id.mySimpleXYPlot);
         button=(Button)findViewById(R.id.button_clear);
+        tvNoData=(TextView)findViewById(R.id.txtNoData);
         ArrayList<Record> recordList=db.getAllRecord(1);
-        Number[] years=new Integer[recordList.size()];
-        Number[] numSightings=new Integer[recordList.size()];
-        for (int i = 0; i < recordList.size(); i++) {
-            years[i]= Integer.parseInt(recordList.get(i).getDate());
-            numSightings[i]=(int)recordList.get(i).getWeight();
+        if(!recordList.isEmpty())
+        {
+            tvNoData.setVisibility(View.INVISIBLE);
+            Number[] years=new Integer[recordList.size()];
+            Number[] numSightings=new Integer[recordList.size()];
+            for (int i = 0; i < recordList.size(); i++) {
+                years[i]= Integer.parseInt(recordList.get(i).getDate());
+                numSightings[i]=(int)Bmi.convertWeight(getApplicationContext(),recordList.get(i).getWeight());
+                testMinMax((int)numSightings[i]);
+            }
+            XYSeries series2 = new SimpleXYSeries(Arrays.asList(years), Arrays.asList(numSightings),"User");
+            LineAndPointFormatter formatter  =
+                    new LineAndPointFormatter(Color.rgb(0, 0,0), Color.BLUE, null, null);
+            //formatter.setFillPaint(lineFill);
+            plot1.addSeries(series2, formatter);
+            // draw a domain tick for each year:
+            plot1.setDomainStep(XYStepMode.SUBDIVIDE, (years.length/2));
         }
-        XYSeries series2 = new SimpleXYSeries(Arrays.asList(years), Arrays.asList(numSightings),"weight vs date");
+        else
+        {
+            plot1.setVisibility(View.INVISIBLE);
+            button.setVisibility(View.INVISIBLE);
+            tvNoData.setVisibility(View.VISIBLE);
+        }
+        Goal userGoal = db.viewGoal(1);
+        if(userGoal.getTarget_date() != null)
+        {
+            Number[] goalYears = new Integer[2];
+            Number[] goalWeight = new Integer[2];
+            goalYears[0] = Integer.parseInt(userGoal.getStart_date());
+            goalYears[1] = Integer.parseInt(userGoal.getTarget_date());
+            goalWeight[0] = (int)Bmi.convertWeight(getApplicationContext(),userGoal.getStart_weight());
+            goalWeight[1] = (int)Bmi.convertWeight(getApplicationContext(),userGoal.getTarget_weight());
+            testMinMax((int)goalWeight[1]);
+
+            XYSeries goalSeries = new SimpleXYSeries(Arrays.asList(goalYears), Arrays.asList(goalWeight),"Goal");
+            LineAndPointFormatter formatter2  =
+                    new LineAndPointFormatter(Color.rgb(255, 0,0), Color.RED, null, null);
+            plot1.addSeries(goalSeries, formatter2);
+        }
+
         plot1.getGraphWidget().getGridBackgroundPaint().setColor(Color.WHITE);
         plot1.getGraphWidget().getDomainGridLinePaint().setColor(Color.BLACK);
         plot1.getGraphWidget().getDomainGridLinePaint().
@@ -70,16 +112,13 @@ private Button button;
         // a View from within onCreate.  one alternative is to specify a dimension in resources
         // and use that accordingly.  at least then the values can be customized for the device type and orientation.
         lineFill.setShader(new LinearGradient(0, 0, 200, 200, Color.WHITE, Color.WHITE, Shader.TileMode.CLAMP));
-        LineAndPointFormatter formatter  =
-                new LineAndPointFormatter(Color.rgb(0, 0,0), Color.BLUE, Color.RED, null);
-        formatter.setFillPaint(lineFill);
         plot1.getGraphWidget().setPaddingRight(2);
-        plot1.addSeries(series2, formatter);
-        // draw a domain tick for each year:
-        plot1.setDomainStep(XYStepMode.SUBDIVIDE, (years.length/2));
+        //set boundaries using minWeight and maxWeight
+        plot1.setRangeBoundaries(minWeight-3, maxWeight+3, BoundaryMode.FIXED);
+
         // customize our domain/range labels
         plot1.setDomainLabel("Year");
-        plot1.setRangeLabel("weight");
+        plot1.setRangeLabel("Weight");
         // get rid of decimal points in our range labels:
         plot1.setRangeValueFormat(new DecimalFormat("1"));
         plot1.setDomainValueFormat(new Format() {
@@ -116,11 +155,24 @@ private Button button;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                plot1.clear();
-                plot1.redraw();
-                db.deleteAllRecord();
 
-
+                new AlertDialog.Builder(v.getContext())
+                        .setTitle("Clear History")
+                        .setMessage("It will delete all stored information. Continue?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                plot1.clear();
+                                plot1.redraw();
+                                db.deleteAllRecord();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
             }
         });
 
@@ -128,5 +180,20 @@ private Button button;
         // by default, AndroidPlot displays developer guides to aid in laying out your plot.
         // To get rid of them call disableAllMarkup():
         //plot1.disableAllMarkup();
+    }
+
+
+    private void testMinMax(int value)
+    {
+        if(value > maxWeight)
+        {
+            maxWeight = value;
+        }
+        if(value < minWeight)
+        {
+            minWeight = value;
+        }
+
+
     }
 }

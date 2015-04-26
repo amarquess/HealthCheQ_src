@@ -28,7 +28,7 @@ public class SetGoalsActivity extends ActionBarActivity {
         tvGoalTitle = (TextView)findViewById(R.id.txtGoal);
         tvGoalMessage = (TextView)findViewById(R.id.txtGoalMessage);
         goalWeight = (Spinner)findViewById(R.id.spinnerWeight);
-        Integer[] itemsWeight = new Integer[]{5,10,15,20,25};
+        Integer[] itemsWeight = new Integer[]{1,2,3,4,5,10,15,20,25};
         ArrayAdapter<Integer> adapterWeight = new ArrayAdapter<Integer>(this, R.layout.spinner_item, itemsWeight);
         goalWeight.setAdapter(adapterWeight);
         goalTime = (Spinner)findViewById(R.id.spinnerTime);

@@ -38,6 +38,8 @@
     <string name="weight_kilograms">kilograms</string>
     <string name="weight_kilograms_abbr">KG</string>
 
+    <string name="history_no_data">No user data. Go to home screen and press the refresh button to get the data from the server.</string>
+
     <string name="settings_weight_title">Select your weight unit</string>
     <string name="title_activity_auth">Connect Withings</string>
     <string name="title_activity_help">Help</string>

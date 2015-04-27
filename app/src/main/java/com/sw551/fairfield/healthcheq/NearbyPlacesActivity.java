@@ -24,25 +24,30 @@ public class NearbyPlacesActivity extends ActionBarActivity {
         btnFitness.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent23=new Intent(NearbyPlacesActivity.this,know_the_facts_child1.class);
-                startActivity(intent23);*/
-
+                Intent intent = new Intent(NearbyPlacesActivity.this,MapsActivity.class);
+                intent.putExtra("search_item", "gym");
+                intent.putExtra("title", getText(R.string.title_fitness_center));
+                startActivity(intent);
             }
         });
 
         btnHealth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent23=new Intent(NearbyPlacesActivity.this,know_the_facts_child2.class);
-                startActivity(intent23);*/
+                Intent intent = new Intent(NearbyPlacesActivity.this,MapsActivity.class);
+                intent.putExtra("search_item", "health");
+                intent.putExtra("title", getText(R.string.title_health_centers));
+                startActivity(intent);
             }
         });
 
         btnFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              /*  Intent intent23=new Intent(NearbyPlacesActivity.this,know_the_facts_child2.class);
-                startActivity(intent23);*/
+                Intent intent = new Intent(NearbyPlacesActivity.this,MapsActivity.class);
+                intent.putExtra("search_item", "grocery_or_supermarket");
+                intent.putExtra("title", getText(R.string.title_food_diet));
+                startActivity(intent);
             }
         });
     }

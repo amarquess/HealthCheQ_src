@@ -26,9 +26,9 @@
             androidPlot.graphWidget.marginLeft="15dp"
             androidPlot.graphWidget.marginBottom="25dp"
             androidPlot.graphWidget.marginRight="10dp"
-            androidPlot.graphWidget.rangeLabelPaint.textSize="15sp"
+            androidPlot.graphWidget.rangeLabelPaint.textSize="5sp"
             androidPlot.graphWidget.rangeOriginLabelPaint.textSize="15sp"
-            androidPlot.graphWidget.domainLabelPaint.textSize="15sp"
+            androidPlot.graphWidget.domainLabelPaint.textSize="5sp"
             androidPlot.graphWidget.domainOriginLabelPaint.textSize="15sp"
             androidPlot.legendWidget.textPaint.textSize="15sp"
             androidPlot.legendWidget.iconSizeMetrics.heightMetric.value="15dp"
@@ -36,20 +36,6 @@
             androidPlot.legendWidget.heightMetric.value="25dp"
             androidPlot.legendWidget.positionMetrics.anchor="right_bottom"
             androidPlot.graphWidget.gridLinePaint.color="#000000"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Clear History"
-            android:textColor="@color/white"
-            android:background="@color/red"
-            android:id="@+id/button_clear"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="30sp"
-            android:paddingLeft="10sp"
-            android:paddingRight="10sp"
-            android:layout_gravity="center_horizontal|bottom" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -61,6 +47,19 @@
             android:layout_gravity="center"
             android:visibility="invisible" />
     </FrameLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear History"
+        android:textColor="@color/white"
+        android:background="@color/black"
+        android:id="@+id/button_clear"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

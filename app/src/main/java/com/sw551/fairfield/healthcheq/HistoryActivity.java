@@ -117,7 +117,7 @@ private Button button;
         plot1.setRangeBoundaries(minWeight-3, maxWeight+3, BoundaryMode.FIXED);
 
         // customize our domain/range labels
-        plot1.setDomainLabel("Year");
+        plot1.setDomainLabel("Date");
         plot1.setRangeLabel("Weight");
         // get rid of decimal points in our range labels:
         plot1.setRangeValueFormat(new DecimalFormat("1"));

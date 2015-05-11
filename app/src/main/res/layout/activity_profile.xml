@@ -21,7 +21,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:inputType="textPersonName"
-            android:text="FirstName"
+            android:hint="FirstName"
             android:ems="10"
             android:id="@+id/firstName"
             android:layout_weight="1" />
@@ -30,7 +30,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:inputType="textPersonName"
-            android:text="LastName"
+            android:hint="LastName"
             android:ems="10"
             android:id="@+id/lastName"
             android:layout_weight="1" />
@@ -124,7 +124,7 @@
             android:inputType="number"
             android:ems="10"
             android:id="@+id/zipCode"
-            android:text="ZipCode"
+            android:hint="ZipCode"
             android:layout_weight="1" />
 
         <Button

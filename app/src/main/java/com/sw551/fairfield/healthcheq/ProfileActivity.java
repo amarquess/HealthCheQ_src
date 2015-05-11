@@ -15,6 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -107,43 +108,61 @@ public class ProfileActivity extends ActionBarActivity {
 
     public void submitProfile(View v)
     {
-        user = new User();
-        user.setFirst_name(firstName.getText().toString());
-        user.setLast_name(lastName.getText().toString());
-        int selectedSex = radioSexGroup.getCheckedRadioButtonId();
-        if(selectedSex == male.getId())
-            user.setGender(Gender.MALE);
-        else
-            user.setGender(Gender.FEMALE);
-
-        user.setDate_of_birth(dateOfBirth.getText().toString());
-
-        Integer feet = Integer.parseInt(dropdownFeet.getSelectedItem().toString());
-        Integer inches = Integer.parseInt(dropdownInches.getSelectedItem().toString());
-        double totalInches = (feet*12)+ inches;
-        double height = totalInches * 2.54;
-        int heightCM = (int)Math.round(height);
-        user.setHeight(heightCM);
-        user.setZipcode(zipCode.getText().toString());
-
-        if(isUserCreated)
+        if(isEmpty(firstName))
         {
-            db.updateUser(user,1);
+            Toast.makeText(getApplicationContext(), "Please fill First Name", Toast.LENGTH_LONG).show();
+        }
+        else if(isEmpty(lastName))
+        {
+            Toast.makeText(getApplicationContext(), "Please fill Last Name", Toast.LENGTH_LONG).show();
+        }
+        else if(isEmpty(zipCode))
+        {
+            Toast.makeText(getApplicationContext(), "Please fill Zipcode", Toast.LENGTH_LONG).show();
         }
         else
         {
-            db.addUser(user);
+            user = new User();
+            user.setFirst_name(firstName.getText().toString());
+            user.setLast_name(lastName.getText().toString());
+            int selectedSex = radioSexGroup.getCheckedRadioButtonId();
+            if(selectedSex == male.getId())
+                user.setGender(Gender.MALE);
+            else
+                user.setGender(Gender.FEMALE);
 
-            SharedPreferences settings = getSharedPreferences("AppPrefsFile", 0);
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putBoolean("isUserCreated", true);
-            editor.commit();
+            user.setDate_of_birth(dateOfBirth.getText().toString());
 
-            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-            startActivity(intent);
+            Integer feet = Integer.parseInt(dropdownFeet.getSelectedItem().toString());
+            Integer inches = Integer.parseInt(dropdownInches.getSelectedItem().toString());
+            double totalInches = (feet*12)+ inches;
+            double height = totalInches * 2.54;
+            int heightCM = (int)Math.round(height);
+            user.setHeight(heightCM);
+            user.setZipcode(zipCode.getText().toString());
+
+            if(isUserCreated)
+            {
+                db.updateUser(user,1);
+                Toast.makeText(getApplicationContext(), "Profile Updated", Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                db.addUser(user);
+
+                SharedPreferences settings = getSharedPreferences("AppPrefsFile", 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putBoolean("isUserCreated", true);
+                editor.commit();
+
+                Toast.makeText(getApplicationContext(), "Profile Created", Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
+            }
+
+            finish();
         }
-
-        finish();
     }
 
     // display current date
@@ -212,6 +231,13 @@ public class ProfileActivity extends ActionBarActivity {
         }
     };
 
+    private boolean isEmpty(EditText etText) {
+        if (etText.getText().toString().trim().length() > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 
 //    @Override
